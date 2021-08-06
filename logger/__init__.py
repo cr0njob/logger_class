@@ -45,7 +45,6 @@ class Logger:
 			stream_handler.setFormatter(logging.Formatter(self.log_format))
 			logger.addHandler(stream_handler)
 		return logger
-			
 
 
 

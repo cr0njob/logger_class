@@ -1,17 +1,37 @@
 #!/usr/bin/env python
 from logger import Logger
+from logger.log_structures import log_struct
 from pack_1 import mod_1
 
-if __name__ == '__main__':
-    new_logger = Logger(
+LOGGER = Logger(
         name=__name__,
         log_level=20,
         log_to_file=True,
         file_mode='w',
-    )
+    ).get_logger()
 
-    logger = new_logger.get_logger()
 
-    logger.info('this is a test')
+if __name__ == '__main__':
+    data = {
+        'first': {
+            'one': '1',
+            'two': '2',
+            'three': '3',
+            'four': {
+                'nest_1': 'n1',
+                'nest_2': 'n2',
+                'nest_3': 'n3'
+            }
+        },
+        'second': [
+            'list_one',
+            'list_two',
+            'list_three'
+        ],
+        'third': (
+            'tuple_one',
+            'tuple_two'
+        )
+    }
 
-    mod_1.test_func()
+    log_struct(LOGGER, data)
