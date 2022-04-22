@@ -1,7 +1,12 @@
 #!/usr/bin/env python
-from pprint import pformat
+import json
+import logging
 
-def log_struct(logger, struct):
-    f = pformat(struct, width=80)
-    for line in f.splitlines():
-        logger.info(line)
+def log_struct(log_obj, d_struct=None):
+    log_obj.setLevel(logging.INFO)
+
+    if d_struct:
+        for s in [dict, list, tuple]:
+            if isinstance(d_struct, s):
+                log_obj.info(json.dumps(d_struct, indent=4))
+    
